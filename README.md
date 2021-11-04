@@ -32,7 +32,7 @@ pip install pymongo
 uvicorn main:app --reload
 ```
 * Os testes serão realizados dentro do http://127.0.0.1:8000/docs#/ 
-**As principais funções/rotas que teremos será:
+**As principais funções/rotas que teremos será:**
 * Mensagem de boas-vindas
 * Conexão com o banco de dados
   * Vai retornar se está funcional ou não
