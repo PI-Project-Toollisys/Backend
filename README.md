@@ -16,7 +16,7 @@ Dar exemplos
 python3 -m venv pi2021
 ```
 
- * O nome da env vai ser pi2021
+* O nome da env vai ser pi2021
 * Para entrar na env basta executar o comando o comando para Linux ou para Windows respectivamente:
 ```
 source pi2021/bin/activate
@@ -45,15 +45,15 @@ uvicorn main:app --reload
 * As principais funções/rotas que teremos será:
 * Mensagem de boas-vindas
 * Conexão com o banco de dados
-* * Vai retornar se está funcional ou não
+  * Vai retornar se está funcional ou não
 * Print simples (no terminal)
-Listar o nome de todas as empresas que responderam o questionário
-No formato JSON
-Podemos retornar os IDs caso necessário como opcional
-A partir do ID ou NOME da empresa, buscar os formulários de respostas
-No formato JSON
-Função para mandar por body as respostas do questionário da respectiva empresa
-No formato JSON
+* Listar o nome de todas as empresas que responderam o questionário
+  * No formato JSON
+    * Podemos retornar os IDs caso necessário como opcional
+* A partir do ID ou NOME da empresa, buscar os formulários de respostas
+  * No formato JSON
+* Função para mandar por body as respostas do questionário da respectiva empresa
+  * No formato JSON
 
 Usuários do MongoDB
 simpleUser:AovgIGUoYKSbpczO
