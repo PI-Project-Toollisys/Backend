@@ -16,7 +16,7 @@ Dar exemplos
 python3 -m venv pi2021
 ```
 
-** O nome da env vai ser pi2021
+ * O nome da env vai ser pi2021
 * Para entrar na env basta executar o comando o comando para Linux ou para Windows respectivamente:
 ```
 source pi2021/bin/activate
