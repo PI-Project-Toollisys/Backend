@@ -46,16 +46,16 @@ uvicorn main:app --reload
 * Mensagem de boas-vindas
 * Conexão com o banco de dados
   * Vai retornar se está funcional ou não
-* Print simples (no terminal)
+  * Print simples (no terminal)
 * Listar o nome de todas as empresas que responderam o questionário
   * No formato JSON
-    * Podemos retornar os IDs caso necessário como opcional
+  * Podemos retornar os IDs caso necessário como opcional
 * A partir do ID ou NOME da empresa, buscar os formulários de respostas
   * No formato JSON
 * Função para mandar por body as respostas do questionário da respectiva empresa
   * No formato JSON
 
-Usuários do MongoDB
-simpleUser:AovgIGUoYKSbpczO
-admin:
+## Usuários do MongoDB
+* simpleUser:AovgIGUoYKSbpczO
+* admin:cFFEh3yTL4WdwsMm
 
