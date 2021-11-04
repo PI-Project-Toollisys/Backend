@@ -14,6 +14,7 @@ source pi2021/bin/activate
 ```
 pi2021\Scripts\activate.bat
 ```
+  * Há em alguns casos, dentro do VSCode, ter que colocar o path completo para o arquivo de execução
 * Para desativar a env, basta digitar o comando:
 ```
 deactivate
