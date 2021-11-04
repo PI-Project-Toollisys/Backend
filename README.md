@@ -45,8 +45,8 @@ uvicorn main:app --reload
 * As principais funções/rotas que teremos será:
 * Mensagem de boas-vindas
 * Conexão com o banco de dados
-** Vai retornar se está funcional ou não
-**Print simples (no terminal)**
+* * Vai retornar se está funcional ou não
+* Print simples (no terminal)
 Listar o nome de todas as empresas que responderam o questionário
 No formato JSON
 Podemos retornar os IDs caso necessário como opcional
