@@ -1,0 +1,45 @@
+def answerEntity(item) -> dict:
+    return{
+        "id": str(item["_id"]),
+        "firm": str(item["firm"]),
+        "date": str(item["date"]),
+        "rec1": str(item["rec1"]),
+        "rec2": str(item["rec2"]),
+        "rec3": str(item["rec3"]),
+        "rec4": str(item["rec4"]),
+        "rec5": str(item["rec5"]),
+        "arm1": str(item["arm1"]),
+        "arm2": str(item["arm2"]),
+        "arm3": str(item["arm3"]),
+        "ent1": str(item["ent1"]),
+        "ent2": str(item["ent2"]),
+        "ent3": str(item["ent3"]),
+        "ent4": str(item["ent4"]),
+        "ent5": str(item["ent5"]),
+        "exp1": str(item["exp1"]),
+        "exp2": str(item["exp2"]),
+        "exp3": str(item["exp3"]),
+        "ins1": str(item["ins1"]),
+        "ins2": str(item["ins2"]),
+        "ins3": str(item["ins3"]),
+        "com1": str(item["com1"]),
+        "com2": str(item["com2"]),
+        "com3": str(item["com3"]),
+        "aca1": str(item["aca1"]),
+        "aca2": str(item["aca2"]),
+        "aca3": str(item["aca3"]),
+        "inf1": str(item["inf1"]),
+        "inf2": str(item["inf2"]),
+        "inf3": str(item["inf3"]),
+        "inf4": str(item["inf4"]),
+        "int1": str(item["int1"]),
+        "int2": str(item["int2"]),
+        "int3": str(item["int3"]),
+        "dad1": str(item["dad1"]),
+        "dad2": str(item["dad2"]),
+        "dad3": str(item["dad3"])
+    }
+
+
+def answersEntity(entity) -> list:
+    return [answerEntity(item) for item in entity]
