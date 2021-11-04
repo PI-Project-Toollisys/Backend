@@ -1,15 +1,5 @@
 # Backend
 
-## Instalação
-
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
-
-Diga como essa etapa será:
-
-```
-Dar exemplos
-```
-
 ## Criar a env:
 * Após verificar se possui o python3 (ou python) instalado, execute o seguinte comando:
 ```
