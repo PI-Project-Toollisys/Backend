@@ -5,9 +5,21 @@ from routes.answerRoute import answerAPI
 from routes.firmRoute import firmAPI
 from routes.ipAttackRoute import ipAttackAPI
 from routes.userRoute import userAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 # Instaciando a API
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(userAPI)
 app.include_router(answerAPI)
 app.include_router(firmAPI)
