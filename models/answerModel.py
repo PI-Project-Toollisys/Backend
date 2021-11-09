@@ -5,37 +5,72 @@ class Answer(BaseModel):
     firm: str
     date: str
     rec1: str
+    rec1p: str
     rec2: str
+    rec2p: str
     rec3: str
+    rec3p: str
     rec4: str
+    rec4p: str
     rec5: str
+    rec5p: str
     arm1: str
+    arm1p: str
     arm2: str
+    arm2p: str
     arm3: str
+    arm3p: str
     ent1: str
+    ent1p: str
     ent2: str
+    ent2p: str
     ent3: str
+    ent3p: str
     ent4: str
+    ent4p: str
     ent5: str
+    ent5p: str
     exp1: str
+    exp1p: str
     exp2: str
+    exp2p: str
     exp3: str
+    exp3p: str
     ins1: str
+    ins1p: str
     ins2: str
+    ins2p: str
     ins3: str
+    ins3p: str
     com1: str
+    com1p: str
     com2: str
+    com2p: str
     com3: str
+    com3p: str
     aca1: str
+    aca1p: str
     aca2: str
+    aca2p: str
     aca3: str
+    aca3p: str
     inf1: str
+    inf1p: str
     inf2: str
+    inf2p: str
     inf3: str
+    inf3p: str
     inf4: str
+    inf4p: str
     int1: str
+    int1p: str
     int2: str
+    int2p: str
     int3: str
+    int3p: str
     dad1: str
+    dad1p: str
     dad2: str
+    dad2p: str
     dad3: str
+    dad3p: str

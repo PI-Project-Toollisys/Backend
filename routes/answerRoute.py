@@ -36,6 +36,15 @@ async def getAnswers(value):
         return answersEntity(client.maindb.answer.find({"date": str(value)}))
 
 
+@answerAPI.get('/getAnswersresults/{value}')
+# Get all answer to database by value (cnpj or date)
+async def getAnswers(value):
+    if value.isnumeric():
+        return answersEntity(client.maindb.answer.find({"firm": str(value)}))
+    else:
+        return answersEntity(client.maindb.answer.find({"date": str(value)}))
+
+
 @answerAPI.post('/postAnswer')
 # Post answer to database
 async def postAnswer(answer: Answer):
