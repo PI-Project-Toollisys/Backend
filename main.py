@@ -5,6 +5,7 @@ from routes.answerRoute import answerAPI
 from routes.firmRoute import firmAPI
 from routes.ipAttackRoute import ipAttackAPI
 from routes.userRoute import userAPI
+from routes.loginRoute import loginAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # Instaciando a API
@@ -24,6 +25,7 @@ app.include_router(userAPI)
 app.include_router(answerAPI)
 app.include_router(firmAPI)
 app.include_router(ipAttackAPI)
+app.include_router(loginAPI)
 
 # Abrindo conexão com o Banco de Dados MongoDB (Atlas)
 # CONNECTION_STRING = "mongodb+srv://simpleUser:AovgIGUoYKSbpczO@cluster0.ynrb3.mongodb.net/maindb?retryWrites=true&w=majority"

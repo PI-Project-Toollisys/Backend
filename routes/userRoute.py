@@ -48,11 +48,21 @@ async def getUsersById(register_identifier):
 @userAPI.post('/postUser')
 # Post user to database
 async def postUser(user: User):
-    client.maindb.user.insert_one(dict(user))
-    return usersEntity(client.maindb.user.find())
+    existing_login = client.maindb.user.find_one({"login": user.login})
+    existing_ri = client.maindb.user.find_one(
+        {"register_identifier": user.register_identifier})
+
+    if not existing_ri:
+        if not existing_login:
+            _id = client.maindb.user.insert_one(dict(user))
+            return userEntity(client.maindb.user.find_one({"_id": ObjectId(str(_id.inserted_id))}))
+        else:
+            return -2  # existe cadastro com esse login
+    else:
+        return -1  # existe cadastro com esse cpf/cnpj
 
 
-@userAPI.put('/updateUser/{id}')
+@ userAPI.put('/updateUser/{id}')
 # Update a usera by ID
 async def updateUser(id, user: User):
     try:
@@ -63,7 +73,7 @@ async def updateUser(id, user: User):
         return dict([])
 
 
-@userAPI.delete('/delUser/{id}')
+@ userAPI.delete('/delUser/{id}')
 # Delete a user by ID
 async def deleteUser(id):
     try:
