@@ -1,41 +1,40 @@
 from pydantic import BaseModel
 
-
 class Answer(BaseModel):
     firm: str
     date: str
-    rec1: str
-    rec2: str
-    rec3: str
-    rec4: str
-    rec5: str
-    arm1: str
-    arm2: str
-    arm3: str
-    ent1: str
-    ent2: str
-    ent3: str
-    ent4: str
-    ent5: str
-    exp1: str
-    exp2: str
-    exp3: str
-    ins1: str
-    ins2: str
-    ins3: str
-    com1: str
-    com2: str
-    com3: str
-    aca1: str
-    aca2: str
-    aca3: str
-    inf1: str
-    inf2: str
-    inf3: str
-    inf4: str
-    int1: str
-    int2: str
-    int3: str
-    dad1: str
-    dad2: str
-    dad3: str
+    rec1: list = []
+    rec2: list = []
+    rec3: list = []
+    rec4: list = []
+    rec5: list = []
+    arm1: list = []
+    arm2: list = []
+    arm3: list = []
+    ent1: list = []
+    ent2: list = []
+    ent3: list = []
+    ent4: list = []
+    ent5: list = []
+    exp1: list = []
+    exp2: list = []
+    exp3: list = []
+    ins1: list = []
+    ins2: list = []
+    ins3: list = []
+    com1: list = []
+    com2: list = []
+    com3: list = []
+    aca1: list = []
+    aca2: list = []
+    aca3: list = []
+    inf1: list = []
+    inf2: list = []
+    inf3: list = []
+    inf4: list = []
+    int1: list = []
+    int2: list = []
+    int3: list = []
+    dad1: list = []
+    dad2: list = []
+    dad3: list = []
