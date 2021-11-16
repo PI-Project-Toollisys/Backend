@@ -1,12 +1,10 @@
-from datetime import timedelta
-from bson.objectid import ObjectId
 from fastapi import APIRouter, HTTPException
+from fastapi.param_functions import Depends
+from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from conf.db import client
-from bson import ObjectId
 
-from models.loginModel import Login
-from routes.token import create_access_token
-from schemas.loginSchema import loginEntity
+# from models.loginModel import Login
+from authentication.token import create_access_token
 from schemas.userSchema import userEntity
 
 from passlib.context import CryptContext
@@ -16,14 +14,14 @@ loginAPI = APIRouter(tags=['Login'])
 
 
 @loginAPI.post('/login')
-async def login(login: Login):
+async def login(loginP: OAuth2PasswordRequestForm = Depends()):
     try:
-        user = userEntity(client.maindb.user.find_one({"login": login.login}))
+        user = userEntity(client.maindb.user.find_one({"login": loginP.username}))
     except:
         raise HTTPException(status_code=404, detail="Invalid Login 1")
 
-    if not pwd_cxt.verify(login.password, user['password']):
+    if not pwd_cxt.verify(loginP.password, user["password"]):
         raise HTTPException(status_code=404, detail="Invalid Login 2")
 
-    access_token = create_access_token(data={"sub": user['register_identifier']})
-    return {"access_token": access_token, "token_type": "bearer"}
+    access_token = create_access_token(data={"sub": user['login']})
+    return {"access_token": access_token, "token_type": user["permission"]}

@@ -1,17 +1,20 @@
 from bson.objectid import ObjectId
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+from fastapi.param_functions import Depends
+from authentication.oaut2 import get_current_user
 from conf.db import client
 from bson import ObjectId
 
 from models.answerModel import Answer
 from schemas.answerSchema import answerEntity, answersEntity
+from models.userModel import User
 
 answerAPI = APIRouter(tags=['Answer'])
 
 
 @answerAPI.get('/getAllAnswers')
 # Get all answer to database
-async def getAllAnswers():
+async def getAllAnswers(current_user: User = Depends(get_current_user)):
     try:
         return answersEntity(client.maindb.answer.find())
     except:
@@ -92,7 +95,13 @@ async def getScoreTotal(firm):
     "dad2": 0,
     "dad3": 0
     }
-    for doc in client.maindb.answer.find({"firm": str(firm)}):
+
+    answers = answersEntity(client.maindb.answer.find({"firm": str(firm)}))
+    
+    if not answers:
+        raise HTTPException(status_code=404, detail="Invalid Login")
+
+    for doc in answers:
         dictAux["rec1"] += int(doc["rec1"][1])
         dictAux["rec2"] += int(doc["rec2"][1])
         dictAux["rec3"] += int(doc["rec3"][1])
@@ -168,11 +177,59 @@ async def getScoreTotal(firm):
     dictAux["dad3"] = float(dictAux["dad3"]/n)
     return dictAux
 
-@answerAPI.get('/getScoreByQuestion/{quest}')
+@answerAPI.get('/getScoreByQuestionSum/{firm}')
 # pergar a questão específica de todas as respostas
-# para somar e dividiir pela quantidade dela (média)
-async def getQuestionScore(firm):
-    pass
+# para somar e dividir pela quantidade dela (média)
+async def getScoreByQuestionSum(firm):
+    dictAux = {
+    "firm": firm,
+    "score_total": 0
+    }
+    answers = answersEntity(client.maindb.answer.find({"firm": str(firm)}))
+    
+    if not answers:
+        raise HTTPException(status_code=404, detail="Invalid Login")
+    for doc in answers:
+        dictAux["score_total"] += int(doc["rec1"][1])
+        dictAux["score_total"] += int(doc["rec2"][1])
+        dictAux["score_total"] += int(doc["rec3"][1])
+        dictAux["score_total"] += int(doc["rec4"][1])
+        dictAux["score_total"] += int(doc["rec5"][1])
+        dictAux["score_total"] += int(doc["arm1"][1])
+        dictAux["score_total"] += int(doc["arm2"][1])
+        dictAux["score_total"] += int(doc["arm3"][1])
+        dictAux["score_total"] += int(doc["ent1"][1])
+        dictAux["score_total"] += int(doc["ent2"][1])
+        dictAux["score_total"] += int(doc["ent3"][1])
+        dictAux["score_total"] += int(doc["ent4"][1])
+        dictAux["score_total"] += int(doc["ent5"][1])
+        dictAux["score_total"] += int(doc["exp1"][1])
+        dictAux["score_total"] += int(doc["exp2"][1])
+        dictAux["score_total"] += int(doc["exp3"][1])
+        dictAux["score_total"] += int(doc["ins1"][1])
+        dictAux["score_total"] += int(doc["ins2"][1])
+        dictAux["score_total"] += int(doc["ins3"][1])
+        dictAux["score_total"] += int(doc["com1"][1])
+        dictAux["score_total"] += int(doc["com2"][1])
+        dictAux["score_total"] += int(doc["com3"][1])
+        dictAux["score_total"] += int(doc["aca1"][1])
+        dictAux["score_total"] += int(doc["aca2"][1])
+        dictAux["score_total"] += int(doc["aca3"][1])
+        dictAux["score_total"] += int(doc["inf1"][1])
+        dictAux["score_total"] += int(doc["inf2"][1])
+        dictAux["score_total"] += int(doc["inf3"][1])
+        dictAux["score_total"] += int(doc["inf4"][1])
+        dictAux["score_total"] += int(doc["int1"][1])
+        dictAux["score_total"] += int(doc["int2"][1])
+        dictAux["score_total"] += int(doc["int3"][1])
+        dictAux["score_total"] += int(doc["dad1"][1])
+        dictAux["score_total"] += int(doc["dad2"][1])
+        dictAux["score_total"] += int(doc["dad3"][1])
+    
+    n = (client.maindb.answer.find({"firm": str(firm)}).count())
+
+    dictAux["score_total"] = float(dictAux["score_total"]/n)
+    return dictAux
 
 
 @answerAPI.post('/postAnswer')

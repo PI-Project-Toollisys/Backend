@@ -3,8 +3,8 @@ from pydantic import BaseModel
 
 class Token(BaseModel):
     access_token: str
-    token_type: str
+    token_type: int
 
 
 class TokenData(BaseModel):
-    username: Optional[str] = None
+    login: Optional[str] = None

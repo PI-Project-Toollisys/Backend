@@ -32,8 +32,6 @@ app.include_router(ipAttackAPI)
 # client = pymongo.MongoClient(CONNECTION_STRING)
 
 # Mensagem de Boas-Vindas
-
-
 @app.get("/")
 def read_root():
     return {"Mensagem": "Boas Vindas!!"}
