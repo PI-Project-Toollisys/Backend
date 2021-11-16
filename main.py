@@ -9,7 +9,7 @@ from routes.loginRoute import loginAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # Instaciando a API
-app = FastAPI()
+app = FastAPI(tags=['Main'])
 
 origins = ["*"]
 
@@ -21,11 +21,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(userAPI)
 app.include_router(answerAPI)
 app.include_router(firmAPI)
-app.include_router(ipAttackAPI)
+app.include_router(userAPI)
 app.include_router(loginAPI)
+app.include_router(ipAttackAPI)
 
 # Abrindo conexão com o Banco de Dados MongoDB (Atlas)
 # CONNECTION_STRING = "mongodb+srv://simpleUser:AovgIGUoYKSbpczO@cluster0.ynrb3.mongodb.net/maindb?retryWrites=true&w=majority"

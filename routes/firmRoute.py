@@ -8,7 +8,7 @@ from bson import ObjectId
 from models.firmModel import Firm
 from schemas.firmSchema import firmEntity, firmsEntity
 
-firmAPI = APIRouter()
+firmAPI = APIRouter(tags=['Firm'])
 
 
 @firmAPI.get('/getAllFirms')

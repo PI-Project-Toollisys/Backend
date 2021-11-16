@@ -6,7 +6,7 @@ from bson import ObjectId
 from models.answerModel import Answer
 from schemas.answerSchema import answerEntity, answersEntity
 
-answerAPI = APIRouter()
+answerAPI = APIRouter(tags=['Answer'])
 
 
 @answerAPI.get('/getAllAnswers')
