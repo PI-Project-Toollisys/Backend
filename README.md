@@ -20,12 +20,9 @@ pi2021\Scripts\activate.bat
 deactivate
 ```
 * Dependências:
+Todos pacotes estão presentes no arquivo `requimentes.txt`, necessitando agora de apenas um comando:
 ```
-pip install autopep8
-pip install fastapi
-pip install uvicorn
-pip install dnspython
-pip install pymongo
+pip3 install -r requirements.txt
 ```
 
 * Como executar o flask:
@@ -50,4 +47,3 @@ uvicorn main:app --reload
 ## Usuários do MongoDB
 * simpleUser:AovgIGUoYKSbpczO
 * admin:cFFEh3yTL4WdwsMm
-
