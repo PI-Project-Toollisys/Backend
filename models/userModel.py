@@ -7,4 +7,4 @@ class User(BaseModel):
     password: str
     permission: int
     firm: str  # cnpj
-    register_identifier: int  # cpf or cnpj
+    register_identifier: str  # cpf or cnpj
