@@ -5,10 +5,11 @@ from routes.answerRoute import answerAPI
 from routes.firmRoute import firmAPI
 from routes.ipAttackRoute import ipAttackAPI
 from routes.userRoute import userAPI
+from routes.loginRoute import loginAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # Instaciando a API
-app = FastAPI()
+app = FastAPI(tags=['Main'])
 
 origins = ["*"]
 
@@ -20,9 +21,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(userAPI)
 app.include_router(answerAPI)
 app.include_router(firmAPI)
+app.include_router(userAPI)
+app.include_router(loginAPI)
 app.include_router(ipAttackAPI)
 
 # Abrindo conexão com o Banco de Dados MongoDB (Atlas)
@@ -30,8 +32,6 @@ app.include_router(ipAttackAPI)
 # client = pymongo.MongoClient(CONNECTION_STRING)
 
 # Mensagem de Boas-Vindas
-
-
 @app.get("/")
 def read_root():
     return {"Mensagem": "Boas Vindas!!"}

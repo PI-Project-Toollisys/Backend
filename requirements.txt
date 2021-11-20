@@ -1,0 +1,11 @@
+# pip3 install -r requirements.txt
+
+autopep8
+fastapi
+uvicorn
+dnspython
+pymongo
+passlib
+bcrypt
+python-jose
+python-multipart

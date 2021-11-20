@@ -6,7 +6,7 @@ def userEntity(item) -> dict:
         "password": str(item["password"]),
         "permission": int(item["permission"]),
         "firm": str(item["firm"]),
-        "register_identifier": int(item["register_identifier"])
+        "register_identifier": str(item["register_identifier"])
     }
 
 

@@ -6,7 +6,7 @@ from bson import ObjectId
 from models.ipAttackModel import IpAttack
 from schemas.ipAttackSchema import ipAttackEntity, ipAttacksEntity
 
-ipAttackAPI = APIRouter()
+ipAttackAPI = APIRouter(tags=['Ip Attack'])
 
 
 @ipAttackAPI.get('/getAllIpAttacks')
