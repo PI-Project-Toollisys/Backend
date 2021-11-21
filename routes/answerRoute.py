@@ -59,11 +59,13 @@ async def getScoreAnswersByQuestion(firm,quest):
 async def getScoreTotal(firm):
     dictAux = {
     "firm": firm,
-    "rec1": 0,
-    "rec2": 0,
-    "rec3": 0,
-    "rec4": 0,
-    "rec5": 0,
+    "reconhecimento":{
+        "rec1": 0,
+        "rec2": 0,
+        "rec3": 0,
+        "rec4": 0,
+        "rec5": 0
+    },
     "arm1": 0,
     "arm2": 0,
     "arm3": 0,
