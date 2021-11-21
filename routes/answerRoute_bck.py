@@ -4,54 +4,52 @@ from fastapi.param_functions import Depends
 from authentication.oaut2 import get_current_user
 from conf.db import client
 from bson import ObjectId
-import numpy as np
 
 from models.answerModel import Answer
 from schemas.answerSchema import answerEntity, answersEntity
+from models.userModel import User
 
 answerAPI = APIRouter(tags=['Answer'])
 
-questionsList = ["rec","arm","ent","exp","ins","com","aca","inft","infm","dad",]
 
 @answerAPI.get('/getAllAnswers')
 # Get all answer to database
-async def getAllAnswers():
-    return answersEntity(client.maindb.answer.find())
+async def getAllAnswers(current_user: User = Depends(get_current_user)):
+    try:
+        return answersEntity(client.maindb.answer.find())
+    except:
+        return dict([])
+
+
+# @answerAPI.get('/getOneAnswer/{id}')
+# # Get all answer to database by id
+# async def getAnswersById(id):
+#     try:
+#         return answerEntity(client.maindb.answer.find_one({"_id": ObjectId(id)}))
+#     except:
+#         return dict([])
 
 
 @answerAPI.get('/getAnswers/{value}')
 # Get all answer to database by value (cnpj or date)
 async def getAnswers(value):
     if value.isnumeric():
-        if not client.maindb.firm.find_one({"cnpj": value}):
-            raise HTTPException(status_code=404, detail="Firm not found")
         return answersEntity(client.maindb.answer.find({"firm": str(value)}))
     else:
-        resultByDate = answersEntity(client.maindb.answer.find({"date": str(value)}))
-        if not resultByDate:
-            raise HTTPException(status_code=404, detail="Answers by date not found")
-        else:
-            return resultByDate
+        return answersEntity(client.maindb.answer.find({"date": str(value)}))
 
 
 @answerAPI.get('/getScoreFirmByQuestion/{firm}/{quest}')
 # Get all answers in especific question
 async def getScoreAnswersByQuestion(firm,quest):
-    if not client.maindb.firm.find_one({"cnpj": firm}):
-        raise HTTPException(status_code=404, detail="Firm not found")
-    if quest not in questionsList:
-        raise HTTPException(status_code=404, detail="Quest not found")
-    if quest == "rec" or quest == "ent":
-        sumResult = list(np.zeros(5))
-    elif quest == "inft":
-        sumResult = list(np.zeros(4))
-    else:
-        sumResult = list(np.zeros(3))
-    for doc in client.maindb.answer.find({"firm": str(firm)},{quest:1}):
-        sumResult = [ (a + b) for a, b in zip(sumResult, doc[quest]['answers']) ]
-    for i in range(len(sumResult)):
-        sumResult[i] = sumResult[i]/client.maindb.answer.find({"firm": str(firm)}).count()
-    return sumResult
+    try:
+        sumResult = 0
+        for doc in client.maindb.answer.find({"firm": str(firm)},{quest:1}):
+            sumResult += doc[quest][1]
+        sumResult = float(sumResult/client.maindb.answer.find({"firm": str(firm)}).count())
+        return {'firm':firm,quest:float(sumResult)}
+    except:
+        return dict([])
 
 
 @answerAPI.get('/getScoreFirmTotal/{firm}')
@@ -98,11 +96,11 @@ async def getScoreTotal(firm):
     "dad3": 0
     }
 
-    if not client.maindb.firm.find_one({"cnpj": firm}):
-        raise HTTPException(status_code=404, detail="Firm not found")
-
     answers = answersEntity(client.maindb.answer.find({"firm": str(firm)}))
     
+    if not answers:
+        raise HTTPException(status_code=404, detail="Invalid Login")
+
     for doc in answers:
         dictAux["rec1"] += int(doc["rec1"][1])
         dictAux["rec2"] += int(doc["rec2"][1])

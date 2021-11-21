@@ -1,0 +1,44 @@
+{
+    "firm": "06990590000123",
+    "date":"2021-12-31",
+    "rec":{
+        "title": "Reconhecimento",
+        "answers":[1,2,3,4,5]
+    },
+    "arm":{
+        "title": "Armamento",
+        "answers":[0,0,0]
+    },
+    "ent":{
+        "title": "Entrega",
+        "answers":[0,0,0,0,0]
+    },
+    "exp":{
+        "title": "Exploracao",
+        "answers":[0,0,0]
+    },
+    "ins":{
+        "title": "Instalacao",
+        "answers":[0,0,0]
+    },
+    "com":{
+        "title": "ComandoControle",
+        "answers":[0,0,0]
+    },
+    "aca":{
+        "title": "AcaoObjetivo",
+        "answers":[0,0,0]
+    },
+    "inft":{
+        "title": "Infraestrutura",
+        "answers":[0,0,0,0]
+    },
+    "infm":{
+        "title": "informacao",
+        "answers":[0,0,0]
+    },
+    "dad":{
+        "title": "Dados",
+        "answers":[0,0,0]   
+    }
+}
