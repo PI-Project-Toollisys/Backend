@@ -39,6 +39,9 @@ async def getAnswers(value):
 async def getScoreAnswersByQuestion(firm,quest):
     if not client.maindb.firm.find_one({"cnpj": firm}):
         raise HTTPException(status_code=404, detail="Firm not found")
+
+    n=client.maindb.answer.find({"firm": str(firm)}).count()
+
     if quest not in questionsList:
         raise HTTPException(status_code=404, detail="Quest not found")
     if quest == "rec" or quest == "ent":
@@ -49,8 +52,9 @@ async def getScoreAnswersByQuestion(firm,quest):
         sumResult = list(np.zeros(3))
     for doc in client.maindb.answer.find({"firm": str(firm)},{quest:1}):
         sumResult = [ (a + b) for a, b in zip(sumResult, doc[quest]['answers']) ]
-    for i in range(len(sumResult)):
-        sumResult[i] = sumResult[i]/client.maindb.answer.find({"firm": str(firm)}).count()
+
+    sumResult = list(map(lambda x: x/n, sumResult))
+
     return sumResult
 
 
@@ -59,124 +63,71 @@ async def getScoreAnswersByQuestion(firm,quest):
 # que possui (relacionados a firma) dividir e obter a média
 # da pontuação
 async def getScoreTotal(firm):
-    dictAux = {
-    "firm": firm,
-    "rec1": 0,
-    "rec2": 0,
-    "rec3": 0,
-    "rec4": 0,
-    "rec5": 0,
-    "arm1": 0,
-    "arm2": 0,
-    "arm3": 0,
-    "ent1": 0,
-    "ent2": 0,
-    "ent3": 0,
-    "ent4": 0,
-    "ent5": 0,
-    "exp1": 0,
-    "exp2": 0,
-    "exp3": 0,
-    "ins1": 0,
-    "ins2": 0,
-    "ins3": 0,
-    "com1": 0,
-    "com2": 0,
-    "com3": 0,
-    "aca1": 0,
-    "aca2": 0,
-    "aca3": 0,
-    "inf1": 0,
-    "inf2": 0,
-    "inf3": 0,
-    "inf4": 0,
-    "int1": 0,
-    "int2": 0,
-    "int3": 0,
-    "dad1": 0,
-    "dad2": 0,
-    "dad3": 0
-    }
-
     if not client.maindb.firm.find_one({"cnpj": firm}):
         raise HTTPException(status_code=404, detail="Firm not found")
 
     answers = answersEntity(client.maindb.answer.find({"firm": str(firm)}))
+
+    if not answers:
+        raise HTTPException(status_code=404, detail="Doesn't has answers")
+
+    n = client.maindb.answer.find({"firm": str(firm)}).count()
+    
+    dictAux = {
+        "firm": str(firm),
+        "rec":{
+            "title": "Reconhecimento",
+            "answers":[0,0,0,0,0]
+        },
+        "arm":{
+            "title": "Armamento",
+            "answers":[0,0,0]
+        },
+        "ent":{
+            "title": "Entrega",
+            "answers":[0,0,0,0,0]
+        },
+        "exp":{
+            "title": "Exploracao",
+            "answers":[0,0,0]
+        },
+        "ins":{
+            "title": "Instalacao",
+            "answers":[0,0,0]
+        },
+        "com":{
+            "title": "ComandoControle",
+            "answers":[0,0,0]
+        },
+        "aca":{
+            "title": "AcaoObjetivo",
+            "answers":[0,0,0]
+        },
+        "inft":{
+            "title": "Infraestrutura",
+            "answers":[0,0,0,0]
+        },
+        "infm":{
+            "title": "informacao",
+            "answers":[0,0,0]
+        },
+        "dad":{
+            "title": "Dados",
+            "answers":[0,0,0]   
+        }
+    }
     
     for doc in answers:
-        dictAux["rec1"] += int(doc["rec1"][1])
-        dictAux["rec2"] += int(doc["rec2"][1])
-        dictAux["rec3"] += int(doc["rec3"][1])
-        dictAux["rec4"] += int(doc["rec4"][1])
-        dictAux["rec5"] += int(doc["rec5"][1])
-        dictAux["arm1"] += int(doc["arm1"][1])
-        dictAux["arm2"] += int(doc["arm2"][1])
-        dictAux["arm3"] += int(doc["arm3"][1])
-        dictAux["ent1"] += int(doc["ent1"][1])
-        dictAux["ent2"] += int(doc["ent2"][1])
-        dictAux["ent3"] += int(doc["ent3"][1])
-        dictAux["ent4"] += int(doc["ent4"][1])
-        dictAux["ent5"] += int(doc["ent5"][1])
-        dictAux["exp1"] += int(doc["exp1"][1])
-        dictAux["exp2"] += int(doc["exp2"][1])
-        dictAux["exp3"] += int(doc["exp3"][1])
-        dictAux["ins1"] += int(doc["ins1"][1])
-        dictAux["ins2"] += int(doc["ins2"][1])
-        dictAux["ins3"] += int(doc["ins3"][1])
-        dictAux["com1"] += int(doc["com1"][1])
-        dictAux["com2"] += int(doc["com2"][1])
-        dictAux["com3"] += int(doc["com3"][1])
-        dictAux["aca1"] += int(doc["aca1"][1])
-        dictAux["aca2"] += int(doc["aca2"][1])
-        dictAux["aca3"] += int(doc["aca3"][1])
-        dictAux["inf1"] += int(doc["inf1"][1])
-        dictAux["inf2"] += int(doc["inf2"][1])
-        dictAux["inf3"] += int(doc["inf3"][1])
-        dictAux["inf4"] += int(doc["inf4"][1])
-        dictAux["int1"] += int(doc["int1"][1])
-        dictAux["int2"] += int(doc["int2"][1])
-        dictAux["int3"] += int(doc["int3"][1])
-        dictAux["dad1"] += int(doc["dad1"][1])
-        dictAux["dad2"] += int(doc["dad2"][1])
-        dictAux["dad3"] += int(doc["dad3"][1])
-    
-    n = client.maindb.answer.find({"firm": str(firm)}).count()
+        for item in doc:
+            if item == "id" or item == "firm" or item == "date":
+                pass
+            else:
+                dictAux[item]['answers'] = [ (a + b) for a, b in zip(dictAux[item]['answers'], doc[item]['answers']) ]
+            
+    for item in dictAux:
+        if item != "firm":
+            dictAux[item]['answers'] = list(map(lambda x: x/n, dictAux[item]['answers']))
 
-    dictAux["rec1"] = float(dictAux["rec1"]/n)
-    dictAux["rec2"] = float(dictAux["rec2"]/n)
-    dictAux["rec3"] = float(dictAux["rec3"]/n)
-    dictAux["rec4"] = float(dictAux["rec4"]/n)
-    dictAux["rec5"] = float(dictAux["rec5"]/n)
-    dictAux["arm1"] = float(dictAux["arm1"]/n)
-    dictAux["arm2"] = float(dictAux["arm2"]/n)
-    dictAux["arm3"] = float(dictAux["arm3"]/n)
-    dictAux["ent1"] = float(dictAux["ent1"]/n)
-    dictAux["ent2"] = float(dictAux["ent2"]/n)
-    dictAux["ent3"] = float(dictAux["ent3"]/n)
-    dictAux["ent4"] = float(dictAux["ent4"]/n)
-    dictAux["ent5"] = float(dictAux["ent5"]/n)
-    dictAux["exp1"] = float(dictAux["exp1"]/n)
-    dictAux["exp2"] = float(dictAux["exp2"]/n)
-    dictAux["exp3"] = float(dictAux["exp3"]/n)
-    dictAux["ins1"] = float(dictAux["ins1"]/n)
-    dictAux["ins2"] = float(dictAux["ins2"]/n)
-    dictAux["ins3"] = float(dictAux["ins3"]/n)
-    dictAux["com1"] = float(dictAux["com1"]/n)
-    dictAux["com2"] = float(dictAux["com2"]/n)
-    dictAux["com3"] = float(dictAux["com3"]/n)
-    dictAux["aca1"] = float(dictAux["aca1"]/n)
-    dictAux["aca2"] = float(dictAux["aca2"]/n)
-    dictAux["aca3"] = float(dictAux["aca3"]/n)
-    dictAux["inf1"] = float(dictAux["inf1"]/n)
-    dictAux["inf2"] = float(dictAux["inf2"]/n)
-    dictAux["inf3"] = float(dictAux["inf3"]/n)
-    dictAux["inf4"] = float(dictAux["inf4"]/n)
-    dictAux["int1"] = float(dictAux["int1"]/n)
-    dictAux["int2"] = float(dictAux["int2"]/n)
-    dictAux["int3"] = float(dictAux["int3"]/n)
-    dictAux["dad1"] = float(dictAux["dad1"]/n)
-    dictAux["dad2"] = float(dictAux["dad2"]/n)
-    dictAux["dad3"] = float(dictAux["dad3"]/n)
     return dictAux
 
 @answerAPI.get('/getScoreByQuestionSum/{firm}')
@@ -187,48 +138,23 @@ async def getScoreByQuestionSum(firm):
     "firm": firm,
     "score_total": 0
     }
+
+    if not client.maindb.firm.find_one({"cnpj": firm}):
+        raise HTTPException(status_code=404, detail="Firm not found")
+    
     answers = answersEntity(client.maindb.answer.find({"firm": str(firm)}))
-    
+
     if not answers:
-        raise HTTPException(status_code=404, detail="Invalid Login")
-    for doc in answers:
-        dictAux["score_total"] += int(doc["rec1"][1])
-        dictAux["score_total"] += int(doc["rec2"][1])
-        dictAux["score_total"] += int(doc["rec3"][1])
-        dictAux["score_total"] += int(doc["rec4"][1])
-        dictAux["score_total"] += int(doc["rec5"][1])
-        dictAux["score_total"] += int(doc["arm1"][1])
-        dictAux["score_total"] += int(doc["arm2"][1])
-        dictAux["score_total"] += int(doc["arm3"][1])
-        dictAux["score_total"] += int(doc["ent1"][1])
-        dictAux["score_total"] += int(doc["ent2"][1])
-        dictAux["score_total"] += int(doc["ent3"][1])
-        dictAux["score_total"] += int(doc["ent4"][1])
-        dictAux["score_total"] += int(doc["ent5"][1])
-        dictAux["score_total"] += int(doc["exp1"][1])
-        dictAux["score_total"] += int(doc["exp2"][1])
-        dictAux["score_total"] += int(doc["exp3"][1])
-        dictAux["score_total"] += int(doc["ins1"][1])
-        dictAux["score_total"] += int(doc["ins2"][1])
-        dictAux["score_total"] += int(doc["ins3"][1])
-        dictAux["score_total"] += int(doc["com1"][1])
-        dictAux["score_total"] += int(doc["com2"][1])
-        dictAux["score_total"] += int(doc["com3"][1])
-        dictAux["score_total"] += int(doc["aca1"][1])
-        dictAux["score_total"] += int(doc["aca2"][1])
-        dictAux["score_total"] += int(doc["aca3"][1])
-        dictAux["score_total"] += int(doc["inf1"][1])
-        dictAux["score_total"] += int(doc["inf2"][1])
-        dictAux["score_total"] += int(doc["inf3"][1])
-        dictAux["score_total"] += int(doc["inf4"][1])
-        dictAux["score_total"] += int(doc["int1"][1])
-        dictAux["score_total"] += int(doc["int2"][1])
-        dictAux["score_total"] += int(doc["int3"][1])
-        dictAux["score_total"] += int(doc["dad1"][1])
-        dictAux["score_total"] += int(doc["dad2"][1])
-        dictAux["score_total"] += int(doc["dad3"][1])
+        raise HTTPException(status_code=200, detail="Doesn't has answers")
     
-    n = (client.maindb.answer.find({"firm": str(firm)}).count())
+    n = client.maindb.answer.find({"firm": str(firm)}).count()
+    
+    for doc in answers:
+        for item in doc:
+            if item == "id" or item == "firm" or item == "date":
+                pass
+            else:
+                dictAux["score_total"] += sum(doc[item]['answers'])
 
     dictAux["score_total"] = float(dictAux["score_total"]/n)
     return dictAux
@@ -237,8 +163,9 @@ async def getScoreByQuestionSum(firm):
 @answerAPI.post('/postAnswer')
 # Post answer to database
 async def postAnswer(answer: Answer):
-    client.maindb.answer.insert_one(dict(answer))
-    return answersEntity(client.maindb.answer.find())
+    _id = client.maindb.answer.insert_one(dict(answer))
+    print(_id.inserted_id)
+    return answerEntity(client.maindb.answer.find_one({"_id": ObjectId(str(_id.inserted_id))}))
 
 
 @answerAPI.put('/updateAnswer/{id}')
@@ -258,4 +185,4 @@ async def deleteAnswer(id):
     try:
         return answerEntity(client.maindb.answer.find_one_and_delete({"_id": ObjectId(id)}))
     except:
-        dict([])
+        raise HTTPException(status_code=404, detail="Doesn't has answer")

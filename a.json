@@ -1,44 +1,44 @@
 {
     "firm": "06990590000123",
-    "date":"2021-12-31",
+    "date":"2021-12-29",
     "rec":{
         "title": "Reconhecimento",
-        "answers":[1,2,3,4,5]
+        "answers":[4,4,4,4,4]
     },
     "arm":{
         "title": "Armamento",
-        "answers":[0,0,0]
+        "answers":[4,4,4]
     },
     "ent":{
         "title": "Entrega",
-        "answers":[0,0,0,0,0]
+        "answers":[4,4,4,4,4]
     },
     "exp":{
         "title": "Exploracao",
-        "answers":[0,0,0]
+        "answers":[4,4,4]
     },
     "ins":{
         "title": "Instalacao",
-        "answers":[0,0,0]
+        "answers":[4,4,4]
     },
     "com":{
         "title": "ComandoControle",
-        "answers":[0,0,0]
+        "answers":[4,4,4]
     },
     "aca":{
         "title": "AcaoObjetivo",
-        "answers":[0,0,0]
+        "answers":[4,4,4]
     },
     "inft":{
         "title": "Infraestrutura",
-        "answers":[0,0,0,0]
+        "answers":[4,4,4,4]
     },
     "infm":{
         "title": "informacao",
-        "answers":[0,0,0]
+        "answers":[4,4,4]
     },
     "dad":{
         "title": "Dados",
-        "answers":[0,0,0]   
+        "answers":[4,4,4]   
     }
 }
