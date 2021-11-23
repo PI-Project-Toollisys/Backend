@@ -3,42 +3,42 @@
     "date":"2021-12-28",
     "rec":{
         "title": "Reconhecimento",
-        "answers":[20,20,20,20,20]
+        "answers":[5,5,5,5,5]
     },
     "arm":{
         "title": "Armamento",
-        "answers":[20,20,20]
+        "answers":[5,5,5]
     },
     "ent":{
         "title": "Entrega",
-        "answers":[20,20,20,20,20]
+        "answers":[5,5,5,5,5]
     },
     "exp":{
         "title": "Exploracao",
-        "answers":[20,20,20]
+        "answers":[5,5,5]
     },
     "ins":{
         "title": "Instalacao",
-        "answers":[20,20,20]
+        "answers":[5,5,5]
     },
     "com":{
         "title": "ComandoControle",
-        "answers":[20,20,20]
+        "answers":[5,5,5]
     },
     "aca":{
         "title": "AcaoObjetivo",
-        "answers":[20,20,20]
+        "answers":[5,5,5]
     },
     "inft":{
         "title": "Infraestrutura",
-        "answers":[20,20,20,20]
+        "answers":[5,5,5,5]
     },
     "infm":{
         "title": "informacao",
-        "answers":[20,20,20]
+        "answers":[5,5,5]
     },
     "dad":{
         "title": "Dados",
-        "answers":[20,20,20]   
+        "answers":[5,5,5]   
     }
 }
