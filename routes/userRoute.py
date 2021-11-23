@@ -64,7 +64,7 @@ async def postUser(user: User):
             return -2  # existe cadastro com esse login
     else:
         return -1  # existe cadastro com esse cpf/cnpj
-
+        
 
 @ userAPI.put('/updateUser/{id}')
 # Update a usera by ID

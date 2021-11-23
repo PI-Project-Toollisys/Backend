@@ -1,0 +1,17 @@
+{
+    "firm": "06990590000123",
+    "comments": [
+      {
+        "title":"Reconhecimento",
+        "code": "rec3",
+        "utterance": "Seu e-mail de trabalho é o mesmo pessoal?",
+        "idealAnswer": "Não",
+        "comment": "É ideal utilizar o email corporativos e não pessoais pois podem estar contaminados com spams e e-mails mal intencionados deixando a rede interna da empresa suscetível a ataques. Por isso, criar um email corporativo é a melhor forma de evitar estes problemas."
+      },
+      {
+        "title":"Reconhecimento",
+        "code": "rec4",
+        "utterance": "Você utiliza as senhas pessoais para softwares do local de trabalho?",
+        "idealAnswer": "Não",
+        "comment": "O ideal é que se tenha senha diferentes para cada tipo de acesso para aumentar a segurança de aplicativos e inclusive evitar invasões dos próprios dados pessoais e dos dados das empresas.Aconselha-se que notifique os funcionários para que mudem as senhas para deixar a segurança maior."
+      },
