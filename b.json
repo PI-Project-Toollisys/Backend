@@ -1,0 +1,23 @@
+{
+    "firm": "06990590000123",
+    "answers":[
+        {
+            "code":"rec1",
+            "enunciado":"Você possui alguma rede social?",
+            "Resposta":"Bla bla bla",
+            "Comentário":"BLA BLA BLA"
+        },
+        {
+            "code":"rec2",
+            "enunciado":"O quanto você é ativo nelas?",
+            "Resposta":"Bla bla bla",
+            "Comentário":"BLA BLA BLA"
+        },
+        {
+            "code":"rec3",
+            "enunciado":"Seu e-mail de trabalho é o mesmo pessoal?",
+            "Resposta":"Bla bla bla",
+            "Comentário":"BLA BLA BLA"
+        },
+    ]
+}
