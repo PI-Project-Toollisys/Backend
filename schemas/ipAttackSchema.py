@@ -6,6 +6,10 @@ def ipAttackEntity(item) -> dict:
         "id": str(item["_id"]),
         "firm": str(item["firm"]),
         "date": str(item["date"]),
+        "listIp":item["listIp"],
+        "port":int(item["port"]),
+        "numReq":int(item["numReq"]),
+        "numProcess":int(item["numProcess"]),
         "process": item["process"],
     }
 

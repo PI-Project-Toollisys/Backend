@@ -1,36 +1,9 @@
 {
-    "Result":{
-        "firm":"1234567890",
-        "data": "09/09/09",
-        "process":[
-            {
-                "id":"12312",
-                "ip":"localhost",
-                "porta":"4000",
-                "requisicao":"123123",
-                "status":"Sucesso",
-                "requisicaofinal": "123123",
-                "Duracao":"1231"
-            },
-            {
-                "id":"12313",
-                "ip":"localhost",
-                "porta":"4000",
-                "requisicao":"123123",
-                "status":"Falha",
-                "requisicaofinal": "123",
-                "Duracao":"1231541"
-            }
-        ]
+    "firm": "06990590000123",
+    "date": "2021-11-29",
+    "listIp": ["localhost"],
+    "port": 4000,
+    "numReq": 100,
+    "numProcess": 2,
+    "process": []
     }
-}
-
-{
-    "host": "localhost",
-    "port": 5012,
-    "listIp": ["192.168.0.1","192.168.0.2"],
-    "numReq": 500,
-    "numProcess": 1,
-}
-
-
