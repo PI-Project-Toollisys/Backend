@@ -32,7 +32,7 @@ def attack(ip, port, req, return_dict):
                 break
 
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(0.03)
+            # sock.settimeout(0.03)
             sock.connect_ex((ip,port))
             request = "GET / HTTP/1.1\r\nHost:localhost\r\n\r\n"
             sock.send(request.encode())
