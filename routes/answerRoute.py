@@ -83,43 +83,53 @@ async def getScoreTotal(firm):
         "firm": str(firm),
         "rec":{
             "title": "Reconhecimento",
-            "answers":[0,0,0,0,0]
+            "answers":[0,0,0,0,0],
+            "sumAnswers":0
         },
         "arm":{
             "title": "Armamento",
-            "answers":[0,0,0]
+            "answers":[0,0,0],
+            "sumAnswers":0
         },
         "ent":{
             "title": "Entrega",
-            "answers":[0,0,0,0,0]
+            "answers":[0,0,0,0,0],
+            "sumAnswers":0
         },
         "exp":{
             "title": "Exploracao",
-            "answers":[0,0,0]
+            "answers":[0,0,0],
+            "sumAnswers":0
         },
         "ins":{
             "title": "Instalacao",
-            "answers":[0,0,0]
+            "answers":[0,0,0],
+            "sumAnswers":0
         },
         "com":{
             "title": "ComandoControle",
-            "answers":[0,0,0]
+            "answers":[0,0,0],
+            "sumAnswers":0
         },
         "aca":{
             "title": "AcaoObjetivo",
-            "answers":[0,0,0]
+            "answers":[0,0,0],
+            "sumAnswers":0
         },
         "inft":{
             "title": "Infraestrutura",
-            "answers":[0,0,0,0]
+            "answers":[0,0,0,0],
+            "sumAnswers":0
         },
         "infm":{
             "title": "informacao",
-            "answers":[0,0,0]
+            "answers":[0,0,0],
+            "sumAnswers":0
         },
         "dad":{
             "title": "Dados",
-            "answers":[0,0,0]   
+            "answers":[0,0,0]   ,
+            "sumAnswers":0
         }
     }
     
@@ -133,8 +143,10 @@ async def getScoreTotal(firm):
     for item in dictAux:
         if item != "firm":
             dictAux[item]['answers'] = list(map(lambda x: x/n, dictAux[item]['answers']))
+            dictAux[item]['sumAnswers']  = sum(dictAux[item]['answers'])
 
     return dictAux
+
 
 @answerAPI.get('/getScoreByQuestionSum/{firm}')
 # pergar a questão específica de todas as respostas
