@@ -1,0 +1,9 @@
+{
+    "firm": "06990590000123",
+    "date": "2021-11-29",
+    "listIp": ["localhost"],
+    "port": 4000,
+    "numReq": 100,
+    "numProcess": 2,
+    "process": []
+    }

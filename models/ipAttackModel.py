@@ -4,8 +4,17 @@ from pydantic import BaseModel
 class IpAttack(BaseModel):
     firm: str
     date: str
-    ip_list: list = []
-    method: str
-    results: str
-    ip_invalid_list: list = []
-    ip_proxy_test_list: list = []
+    listIp: list = []
+    port: int
+    numReq: int
+    numProcess: int
+    process: list = []
+
+class postAttack(BaseModel):
+    firm: str
+    date: str
+    listIp: list = []
+    port: int
+    numReq: int
+    numProcess: int
+    process: list = []

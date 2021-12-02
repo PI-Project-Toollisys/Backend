@@ -1,41 +1,15 @@
 from pydantic import BaseModel
 
-
 class Answer(BaseModel):
     firm: str
     date: str
-    rec1: str
-    rec2: str
-    rec3: str
-    rec4: str
-    rec5: str
-    arm1: str
-    arm2: str
-    arm3: str
-    ent1: str
-    ent2: str
-    ent3: str
-    ent4: str
-    ent5: str
-    exp1: str
-    exp2: str
-    exp3: str
-    ins1: str
-    ins2: str
-    ins3: str
-    com1: str
-    com2: str
-    com3: str
-    aca1: str
-    aca2: str
-    aca3: str
-    inf1: str
-    inf2: str
-    inf3: str
-    inf4: str
-    int1: str
-    int2: str
-    int3: str
-    dad1: str
-    dad2: str
-    dad3: str
+    rec: dict = {}
+    arm: dict = {}
+    ent: dict = {}
+    exp: dict = {}
+    ins: dict = {}
+    com: dict = {}
+    aca: dict = {}
+    inft: dict = {}
+    infm: dict = {}
+    dad: dict = {}
