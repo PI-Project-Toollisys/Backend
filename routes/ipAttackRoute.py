@@ -40,7 +40,7 @@ async def getIpAttacksBy(value):
 
 
 @ipAttackAPI.post('/postIpAttack')
-# Post ipAttack to database
+# Post ipAttack without process to database
 async def postIpAttack(ipAttack: postAttack):
     if not client.maindb.firm.find_one({"cnpj": ipAttack.firm}):
         raise HTTPException(status_code=404, detail="Invalid Firm")
@@ -66,7 +66,7 @@ async def postIpAttack(ipAttack: postAttack):
 
 
 @ipAttackAPI.put('/updateIpAttack/{firm}/{date}')
-# Upate a ipAttack by ID
+# Update specific ipAttack json filtered by cnpj and date with attack execution
 async def updateIpAttack(firm,date):
     if not client.maindb.firm.find_one({"cnpj": firm}):
         raise HTTPException(status_code=404, detail="Invalid Firm")
