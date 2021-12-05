@@ -26,9 +26,7 @@ def attack(ip, port, req, return_dict):
                     "duracao":result
                     }
 
-                process_json = json.dumps(process)
-
-                print(process_json)
+                return_dict.append(process)
                 break
 
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

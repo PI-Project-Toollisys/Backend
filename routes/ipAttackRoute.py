@@ -86,7 +86,7 @@ async def updateIpAttack(firm,date):
         jobs = []
 
         for ip in ipAttackGet["listIp"]:
-            for i in range(ipAttackGet["numProcess"]):
+            for _i in range(ipAttackGet["numProcess"]):
                 atck = Process(target=attack, args=(ip, ipAttackGet["port"], ipAttackGet["numReq"],return_list))
                 jobs.append(atck)
                 atck.start()
